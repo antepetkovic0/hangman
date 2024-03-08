@@ -1,9 +1,14 @@
+import { Navigate, Route, Routes } from 'react-router-dom';
+import { ROUTES } from './navigation/routes';
+
 function App() {
   return (
-    <div>
-      <h1>Hello world</h1>
-      <p>test</p>
-    </div>
+    <Routes>
+      {ROUTES.map(({ path, element }) => (
+        <Route key={path} path={path} element={element}></Route>
+      ))}
+      <Route path={'*'} element={<Navigate to={'/'} />} />
+    </Routes>
   );
 }
 
