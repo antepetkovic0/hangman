@@ -1,3 +1,5 @@
+import Intro from '../components/features/intro/Intro';
+
 export interface RouteData {
   path: string;
   element: React.ReactElement;
@@ -6,7 +8,7 @@ export interface RouteData {
 export const ROUTES: RouteData[] = [
   {
     path: '/',
-    element: <div>user input</div>
+    element: <Intro />
   },
   {
     path: '/game',
