@@ -1,8 +1,8 @@
-import { useAppDispatch, useAppSelector } from '../../../store/hooks';
-import { set } from '../../../store/features/user/user-slice';
-import FormRow from '../../core/FormRow/FormRow';
-import Input from '../../core/Input/Input';
-import Button from '../../core/Button/Button';
+import { useAppDispatch, useAppSelector } from '@store/hooks';
+import { set } from '@store/features/user/user-slice';
+import Button from '@components/core/Button/Button';
+import FormRow from '@components/core/FormRow/FormRow';
+import Input from '@components/core/Input/Input';
 
 function Intro() {
   const { name } = useAppSelector((state) => state.user);

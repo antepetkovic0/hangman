@@ -1,6 +1,6 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
-import { ROUTES } from './navigation/routes';
-import Layout from './components/shared/Layout/Layout';
+import { ROUTES } from '@navigation/routes';
+import Layout from '@components/shared/Layout/Layout';
 
 function App() {
   return (
