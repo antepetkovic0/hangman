@@ -19,9 +19,10 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       clsx({
         'text-slate-100 bg-indigo-500 border-indigo-500 hover:bg-indigo-700 hover:border-indigo-700 focus:bg-indigo-700 focus:border-indigo-700':
           variant === 'contained',
-        'text-slate-100 bg-transparent border-indigo-500 hover:border-indigo-700 focus:border-indigo-700 outline-none':
+        'text-slate-100 bg-transparent border-indigo-500 hover:border-indigo-700 focus:border-indigo-700':
           variant === 'outlined',
-        'text-gray-500 bg-gray-300 border-none': disabled
+        'text-gray-500 bg-gray-300 border-gray-300 hover:bg-gray-300 hover:border-gray-300':
+          disabled
       })
     );
 

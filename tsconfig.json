@@ -22,9 +22,12 @@
 
     "baseUrl": "./src",
     "paths": {
+      "@api/*": ["api/*"],
       "@components/*": ["components/*"],
       "@navigation/*": ["navigation/*"],
-      "@store/*": ["store/*"]
+      "@store/*": ["store/*"],
+      "@interfaces/*": ["interfaces/*"],
+      "@utils/*": ["utils/*"]
     },
 
     "types": ["@testing-library/jest-dom"]

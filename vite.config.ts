@@ -5,9 +5,12 @@ export default defineConfig({
   plugins: [react()],
   resolve: {
     alias: {
+      '@api': '/src/api',
       '@components': '/src/components',
       '@navigation': '/src/navigation',
-      '@store': '/src/store'
+      '@store': '/src/store',
+      '@interfaces': '/src/interfaces',
+      '@utils': '/src/utils'
     }
   },
   test: {
