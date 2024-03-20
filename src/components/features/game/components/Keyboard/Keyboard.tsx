@@ -1,10 +1,10 @@
+import { useMemo } from 'react';
 import { useAppDispatch, useAppSelector } from '@store/hooks';
 import {
   incrementNumberOfMisses,
   setGuesses
 } from '@store/features/game/game-slice';
 import Button from '@components/core/Button/Button';
-import { useMemo } from 'react';
 
 const KEYS = [
   'A',
@@ -65,20 +65,14 @@ const Keyboard = () => {
   };
 
   return (
-    <div
-      //   className="grid grid-cols-auto-fit minmax-75 gap-3"
-      style={{
-        display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fit, minmax(75px, 1fr))',
-        gap: '.5rem'
-      }}
-    >
+    <div className="grid grid-cols-keyboard gap-3">
       {KEYS.map((key) => {
         const correctGuessedKey = correctLetters.includes(key);
         const wrongGuessedKey = incorrectLetters.includes(key);
 
         return (
           <Button
+            className="px-2 py-1"
             key={key}
             variant="contained"
             label={key}

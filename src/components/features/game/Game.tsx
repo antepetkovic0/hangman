@@ -29,18 +29,12 @@ function Game() {
       return <ErrorFallback error={error} resetBoundary={startGame} />;
     case 'fulfilled':
       return (
-        <div>
-          <div className="flex flex-col gap-2">
-            <div
-              style={{
-                display: 'flex'
-              }}
-            >
-              <HangmanSketch />
-            </div>
-            <QuoteDisplay />
-            <Keyboard />
+        <div className="flex flex-col gap-8 p-8">
+          <div className="flex justify-center">
+            <HangmanSketch />
           </div>
+          <QuoteDisplay />
+          <Keyboard />
         </div>
       );
   }
