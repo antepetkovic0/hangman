@@ -2,12 +2,14 @@ import { createSlice } from '@reduxjs/toolkit';
 
 interface GameState {
   errors: number;
+  guesses: string[];
   gameStart: number;
   gameEnd: number;
 }
 
 const initialState: GameState = {
   errors: 0,
+  guesses: [],
   gameStart: 0,
   gameEnd: 0
 };
@@ -19,6 +21,9 @@ const gameSlice = createSlice({
     incrementNumberOfMisses(state) {
       state.errors += 1;
     },
+    setGuesses(state, action) {
+      state.guesses.push(action.payload);
+    },
     setGameStart(state, action) {
       state.gameStart = action.payload;
     },
@@ -28,6 +33,6 @@ const gameSlice = createSlice({
   }
 });
 
-export const { incrementNumberOfMisses, setGameStart, setGameEnd } =
+export const { incrementNumberOfMisses, setGuesses, setGameStart, setGameEnd } =
   gameSlice.actions;
 export default gameSlice.reducer;

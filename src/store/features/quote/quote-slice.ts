@@ -4,7 +4,7 @@ import {
   createSlice
 } from '@reduxjs/toolkit';
 import { QuotableApiService } from '@api/qoutable/quotable-api.service';
-import { countQuoteUniqueLetters } from '@utils/quote.utils';
+import { countQuoteUniqueLetters, removeNonLetters } from '@utils/quote.utils';
 
 type QuoteStateStatus = 'idle' | 'pending' | 'fulfilled' | 'rejected';
 
@@ -14,6 +14,7 @@ interface QuoteState {
     length: number;
     uniqueCharacters: number;
     content: string;
+    contentWithoutSpecialChars: string;
   };
   status: QuoteStateStatus;
   error?: SerializedError;
@@ -24,7 +25,8 @@ const initialState: QuoteState = {
     id: '',
     length: 0,
     uniqueCharacters: 0,
-    content: ''
+    content: '',
+    contentWithoutSpecialChars: ''
   },
   status: 'idle',
   error: undefined
@@ -46,12 +48,16 @@ export const quoteSlice = createSlice({
       state.status = 'pending';
     });
     builder.addCase(fetchQuote.fulfilled, (state, action) => {
+      const content = action.payload.content.toUpperCase();
+      const contentWithoutSpecialChars = removeNonLetters(content);
+
       state.status = 'fulfilled';
       state.quote = {
         id: action.payload._id,
         length: action.payload.length,
-        uniqueCharacters: countQuoteUniqueLetters(action.payload.content),
-        content: action.payload.content
+        uniqueCharacters: countQuoteUniqueLetters(content),
+        content,
+        contentWithoutSpecialChars
       };
     });
     builder.addCase(fetchQuote.rejected, (state, action) => {
