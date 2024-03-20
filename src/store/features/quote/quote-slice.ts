@@ -1,6 +1,12 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import {
+  SerializedError,
+  createAsyncThunk,
+  createSlice
+} from '@reduxjs/toolkit';
 import { QuotableApiService } from '@api/qoutable/quotable-api.service';
 import { countQuoteUniqueLetters } from '@utils/quote.utils';
+
+type QuoteStateStatus = 'idle' | 'pending' | 'fulfilled' | 'rejected';
 
 interface QuoteState {
   quote: {
@@ -9,8 +15,8 @@ interface QuoteState {
     uniqueCharacters: number;
     content: string;
   };
-  isLoading: boolean;
-  error?: string;
+  status: QuoteStateStatus;
+  error?: SerializedError;
 }
 
 const initialState: QuoteState = {
@@ -20,13 +26,14 @@ const initialState: QuoteState = {
     uniqueCharacters: 0,
     content: ''
   },
-  isLoading: false,
-  error: ''
+  status: 'idle',
+  error: undefined
 };
 
 export const fetchQuote = createAsyncThunk('quote/fetchQuote', async () => {
   const quotableApi = new QuotableApiService();
   const res = await quotableApi.getRandomQuoute();
+
   return res;
 });
 
@@ -36,10 +43,10 @@ export const quoteSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(fetchQuote.pending, (state) => {
-      state.isLoading = true;
+      state.status = 'pending';
     });
     builder.addCase(fetchQuote.fulfilled, (state, action) => {
-      state.isLoading = false;
+      state.status = 'fulfilled';
       state.quote = {
         id: action.payload._id,
         length: action.payload.length,
@@ -48,8 +55,8 @@ export const quoteSlice = createSlice({
       };
     });
     builder.addCase(fetchQuote.rejected, (state, action) => {
-      state.isLoading = false;
-      state.error = action.error.message;
+      state.status = 'rejected';
+      state.error = action.error;
     });
   }
 });

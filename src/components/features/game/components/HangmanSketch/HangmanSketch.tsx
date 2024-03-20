@@ -1,25 +1,43 @@
 const HEAD = (
-  <div className="w-[35px] h-[35px] border-[5px] border-slate-100 rounded-full absolute top-[50px] right-[-15px]" />
+  <div
+    key="head"
+    className="w-[35px] h-[35px] border-[5px] border-slate-100 rounded-full absolute top-[50px] right-[-15px]"
+  />
 );
 
 const BODY = (
-  <div className="w-[5px] h-[75px] bg-slate-100 absolute top-[85px] right-0" />
+  <div
+    key="body"
+    className="w-[5px] h-[75px] bg-slate-100 absolute top-[85px] right-0"
+  />
 );
 
 const RIGHT_ARM = (
-  <div className="w-[60px] h-[5px] bg-slate-100 absolute top-[130px] right-[-60px] transform rotate-[-30deg] origin-bottom-left" />
+  <div
+    key="right-arm"
+    className="w-[60px] h-[5px] bg-slate-100 absolute top-[130px] right-[-60px] transform rotate-[-30deg] origin-bottom-left"
+  />
 );
 
 const LEFT_ARM = (
-  <div className="w-[60px] h-[5px] bg-slate-100 absolute top-[130px] right-[5px] transform rotate-[30deg] origin-bottom-right" />
+  <div
+    key="left-arm"
+    className="w-[60px] h-[5px] bg-slate-100 absolute top-[130px] right-[5px] transform rotate-[30deg] origin-bottom-right"
+  />
 );
 
 const RIGHT_LEG = (
-  <div className="w-[60px] h-[5px] bg-slate-100 absolute top-[155px] right-[-55px] transform rotate-[60deg] origin-bottom-left" />
+  <div
+    key="right-leg"
+    className="w-[60px] h-[5px] bg-slate-100 absolute top-[155px] right-[-55px] transform rotate-[60deg] origin-bottom-left"
+  />
 );
 
 const LEFT_LEG = (
-  <div className="w-[60px] h-[5px] bg-slate-100 absolute top-[155px] right-0 transform rotate-[-60deg] origin-bottom-right" />
+  <div
+    key="left-leg"
+    className="w-[60px] h-[5px] bg-slate-100 absolute top-[155px] right-0 transform rotate-[-60deg] origin-bottom-right"
+  />
 );
 
 const BODY_PARTS = [HEAD, BODY, RIGHT_ARM, LEFT_ARM, RIGHT_LEG, LEFT_LEG];

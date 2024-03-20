@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '@store/hooks';
-import { set } from '@store/features/user/user-slice';
+import { setUserName } from '@store/features/user/user-slice';
 import Button from '@components/core/Button/Button';
 import FormRow from '@components/core/FormRow/FormRow';
 import Input from '@components/core/Input/Input';
@@ -11,7 +11,7 @@ function Intro() {
   const dispatch = useAppDispatch();
 
   const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    dispatch(set(event.target.value));
+    dispatch(setUserName(event.target.value));
   };
 
   const handleSubmit = () => {
