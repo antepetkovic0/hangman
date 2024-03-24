@@ -1,7 +1,8 @@
-import { useMemo } from 'react';
+import { useEffect, useMemo } from 'react';
 import { useAppDispatch, useAppSelector } from '@store/hooks';
 import {
   incrementNumberOfMisses,
+  setGameEnd,
   setGuesses
 } from '@store/features/game/game-slice';
 import Button from '@components/core/Button/Button';
@@ -56,6 +57,16 @@ const Keyboard = () => {
       { correctLetters: [] as string[], incorrectLetters: [] as string[] }
     );
   }, [guesses, quoteLetters]);
+
+  useEffect(() => {
+    if (incorrectLetters.length >= 6) {
+      dispatch(setGameEnd('lose'));
+    }
+
+    if (quoteLetters.split('').every((letter) => guesses.includes(letter))) {
+      dispatch(setGameEnd('win'));
+    }
+  }, [dispatch, guesses, quoteLetters, incorrectLetters]);
 
   const handleKeyClick = (key: string) => {
     dispatch(setGuesses(key));

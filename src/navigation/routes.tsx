@@ -1,5 +1,6 @@
 import Game from '@components/features/game/Game';
 import Intro from '@components/features/intro/Intro';
+import Score from '@components/features/score/Score';
 
 export interface RouteData {
   path: string;
@@ -20,7 +21,7 @@ export const ROUTES: RouteData[] = [
   },
   {
     path: '/score',
-    element: <div>score</div>,
+    element: <Score />,
     isProtected: true
   }
 ];

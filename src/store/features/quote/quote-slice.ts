@@ -3,7 +3,7 @@ import {
   createAsyncThunk,
   createSlice
 } from '@reduxjs/toolkit';
-import { QuotableApiService } from '@api/qoutable/quotable-api.service';
+import { QuotableApiService } from '@api/quotable/quotable-api.service';
 import { countQuoteUniqueLetters, removeNonLetters } from '@utils/quote.utils';
 
 type QuoteStateStatus = 'idle' | 'pending' | 'fulfilled' | 'rejected';

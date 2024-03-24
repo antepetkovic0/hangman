@@ -3,40 +3,32 @@ import { useAppDispatch, useAppSelector } from '@store/hooks';
 import { fetchQuote } from '@store/features/quote/quote-slice';
 import { setGameStart } from '@store/features/game/game-slice';
 import ErrorFallback from '@components/shared/utilities/ErrorFallback/ErrorFallback';
-import HangmanSketch from './components/HangmanSketch/HangmanSketch';
-import QuoteDisplay from './components/QuoteDisplay/QuoteDisplay';
-import Keyboard from './components/Keyboard/Keyboard';
+import GameBoard from './components/GameBoard/GameBoard';
 
 function Game() {
-  const { status, error } = useAppSelector((state) => state.quote);
+  const quoteStatus = useAppSelector((state) => state.quote.status);
+  const quoteError = useAppSelector((state) => state.quote.error);
+
   const dispatch = useAppDispatch();
 
   const startGame = useCallback(async () => {
     await dispatch(fetchQuote());
-    dispatch(setGameStart(new Date().getTime()));
+    dispatch(setGameStart());
   }, [dispatch]);
 
   useEffect(() => {
     startGame();
   }, [startGame]);
 
-  switch (status) {
+  switch (quoteStatus) {
     case 'idle':
       return null;
     case 'pending':
       return <div>loading</div>;
     case 'rejected':
-      return <ErrorFallback error={error} resetBoundary={startGame} />;
+      return <ErrorFallback error={quoteError} resetBoundary={startGame} />;
     case 'fulfilled':
-      return (
-        <div className="flex flex-col gap-8 p-8">
-          <div className="flex justify-center">
-            <HangmanSketch />
-          </div>
-          <QuoteDisplay />
-          <Keyboard />
-        </div>
-      );
+      return <GameBoard restartGame={startGame} />;
   }
 }
 

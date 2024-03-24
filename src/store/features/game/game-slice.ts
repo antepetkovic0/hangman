@@ -1,6 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+type GameStatus = 'idle' | 'inprogress' | 'win' | 'lose';
+
 interface GameState {
+  status: GameStatus;
   errors: number;
   guesses: string[];
   gameStart: number;
@@ -8,6 +11,7 @@ interface GameState {
 }
 
 const initialState: GameState = {
+  status: 'idle',
   errors: 0,
   guesses: [],
   gameStart: 0,
@@ -24,11 +28,18 @@ const gameSlice = createSlice({
     setGuesses(state, action) {
       state.guesses.push(action.payload);
     },
-    setGameStart(state, action) {
-      state.gameStart = action.payload;
+    setGameStart(state) {
+      state = {
+        ...initialState,
+        status: 'inprogress',
+        gameStart: new Date().getTime()
+      };
+
+      return state;
     },
     setGameEnd(state, action) {
-      state.gameEnd = action.payload;
+      state.status = action.payload;
+      state.gameEnd = new Date().getTime();
     }
   }
 });
