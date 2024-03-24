@@ -19,7 +19,7 @@ function Intro() {
   };
 
   return (
-    <div className="px-8 py-24 flex flex-col gap-4 mx-auto w-full max-w-md ">
+    <div className="px-4 md:px-8 py-24 flex flex-col gap-4 mx-auto w-full max-w-md ">
       <FormRow id="user-name" label="Username">
         <Input
           id="user-name"

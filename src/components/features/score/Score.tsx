@@ -25,13 +25,13 @@ const Score = () => {
       return <ErrorFallback error={error} resetBoundary={getScores} />;
     case 'fulfilled':
       return (
-        <div className="p-8 mx-auto">
+        <div className="p-4 md:p-8 mx-auto">
           <table className="min-w-full bg-slate-100 shadow-md rounded my-6">
             <thead>
               <tr className="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
-                <th className="py-3 px-6 text-left">#</th>
-                <th className="py-3 px-6 text-left">Username</th>
-                <th className="py-3 px-6 text-left">Score</th>
+                <th className="py-1 px-2 md:py-3 md:px-6 text-left">#</th>
+                <th className="py-1 px-2 md:px-6 text-left">Username</th>
+                <th className="py-1 px-2 md:px-6 text-left">Score</th>
               </tr>
             </thead>
             <tbody className="text-gray-600 text-sm font-light">
@@ -40,13 +40,13 @@ const Score = () => {
                   key={`${idx}-${userName}`}
                   className="border-b border-gray-200 hover:bg-gray-100"
                 >
-                  <td className="py-3 px-6 text-left whitespace-nowrap">
+                  <td className="py-1 px-2 md:px-6 text-left whitespace-nowrap">
                     {idx + 1}
                   </td>
-                  <td className="py-3 px-6 text-left whitespace-nowrap">
+                  <td className="py-1 px-2 md:px-6 text-left whitespace-nowrap">
                     {userName}
                   </td>
-                  <td className="py-3 px-6 text-left whitespace-nowrap">
+                  <td className="py-1 px-2 md:px-6 text-left whitespace-nowrap">
                     {score}
                   </td>
                 </tr>

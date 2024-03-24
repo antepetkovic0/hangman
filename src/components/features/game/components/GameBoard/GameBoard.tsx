@@ -45,7 +45,7 @@ const GameBoard = ({ restartGame }: GameBoardProps) => {
       return null;
     case 'inprogress':
       return (
-        <div className="flex flex-col gap-8 p-8">
+        <div className="flex flex-col gap-8 p-4 md:p-8">
           <div className="flex justify-center">
             <HangmanSketch />
           </div>
