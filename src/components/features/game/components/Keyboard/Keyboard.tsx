@@ -6,6 +6,7 @@ import {
   setGuesses
 } from '@store/features/game/game-slice';
 import Button from '@components/core/Button/Button';
+import { MAX_GAME_ERRORS } from '@constants/game';
 
 const KEYS = [
   'A',
@@ -59,7 +60,7 @@ const Keyboard = () => {
   }, [guesses, quoteLetters]);
 
   useEffect(() => {
-    if (incorrectLetters.length >= 6) {
+    if (incorrectLetters.length >= MAX_GAME_ERRORS) {
       dispatch(setGameEnd('lose'));
     }
 

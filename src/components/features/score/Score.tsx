@@ -1,7 +1,8 @@
-import ErrorFallback from '@components/shared/utilities/ErrorFallback/ErrorFallback';
-import { fetchScores } from '@store/features/score/score-slice';
-import { useAppDispatch, useAppSelector } from '@store/hooks';
 import { useCallback, useEffect } from 'react';
+import { useAppDispatch, useAppSelector } from '@store/hooks';
+import { fetchScores } from '@store/features/score/score-slice';
+import Spinner from '@components/core/Spinner/Spinner';
+import ErrorFallback from '@components/shared/utilities/ErrorFallback/ErrorFallback';
 
 const Score = () => {
   const { scores, status, error } = useAppSelector((state) => state.score);
@@ -20,9 +21,17 @@ const Score = () => {
     case 'idle':
       return null;
     case 'pending':
-      return <div>loading</div>;
+      return (
+        <div className="flex justify-center items-center">
+          <Spinner />
+        </div>
+      );
     case 'rejected':
-      return <ErrorFallback error={error} resetBoundary={getScores} />;
+      return (
+        <div className="place-content-center">
+          <ErrorFallback error={error} resetBoundary={getScores} />;
+        </div>
+      );
     case 'fulfilled':
       return (
         <div className="p-4 md:p-8 mx-auto">

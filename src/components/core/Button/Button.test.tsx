@@ -35,4 +35,13 @@ describe('Button', () => {
 
     expect(handleClickMock).toHaveBeenCalledTimes(0);
   });
+
+  it('should render loading text when isLoading is true', () => {
+    const onClick = vi.fn();
+    const { getByText } = render(
+      <Button variant="contained" label="btn" onClick={onClick} isLoading />
+    );
+    const loadingText = getByText('Loading');
+    expect(loadingText).toBeInTheDocument();
+  });
 });

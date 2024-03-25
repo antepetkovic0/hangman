@@ -2,6 +2,7 @@ import { useCallback, useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '@store/hooks';
 import { fetchQuote } from '@store/features/quote/quote-slice';
 import { setGameStart } from '@store/features/game/game-slice';
+import Spinner from '@components/core/Spinner/Spinner';
 import ErrorFallback from '@components/shared/utilities/ErrorFallback/ErrorFallback';
 import GameBoard from './components/GameBoard/GameBoard';
 
@@ -24,9 +25,17 @@ function Game() {
     case 'idle':
       return null;
     case 'pending':
-      return <div>loading</div>;
+      return (
+        <div className="flex justify-center items-center">
+          <Spinner />
+        </div>
+      );
     case 'rejected':
-      return <ErrorFallback error={quoteError} resetBoundary={startGame} />;
+      return (
+        <div className="place-content-center">
+          <ErrorFallback error={quoteError} resetBoundary={startGame} />
+        </div>
+      );
     case 'fulfilled':
       return <GameBoard restartGame={startGame} />;
   }

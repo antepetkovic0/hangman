@@ -24,6 +24,7 @@
     "paths": {
       "@api/*": ["api/*"],
       "@components/*": ["components/*"],
+      "@constants/*": ["constants/*"],
       "@navigation/*": ["navigation/*"],
       "@store/*": ["store/*"],
       "@interfaces/*": ["interfaces/*"],

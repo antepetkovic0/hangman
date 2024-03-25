@@ -8,7 +8,10 @@ interface ErrorFallbackProps {
 
 const ErrorFallback = ({ error, resetBoundary }: ErrorFallbackProps) => {
   return (
-    <div role="alert">
+    <div
+      role="alert"
+      className="flex flex-col justify-center items-center gap-4"
+    >
       <p>Something went wrong</p>
       {error?.message && <pre>{error.message}</pre>}
       <Button label="Try again" variant="contained" onClick={resetBoundary} />

@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { IngemarkApiService } from '@api/ingemark/ingemark-api.service';
 import { useAppSelector } from '@store/hooks';
@@ -26,16 +27,26 @@ const GameBoard = ({ restartGame }: GameBoardProps) => {
   const gameStart = useAppSelector((state) => state.game.gameStart);
   const gameEnd = useAppSelector((state) => state.game.gameEnd);
 
+  const [isNextButtonLoading, setIsNextButtonLoading] = useState(false);
+
   const handleNextClick = async () => {
     const api = new IngemarkApiService();
-    await api.sendScore({
-      duration: gameEnd - gameStart,
-      errors,
-      length,
-      quoteId,
-      uniqueCharacters,
-      userName
-    });
+
+    try {
+      setIsNextButtonLoading(true);
+      await api.sendScore({
+        duration: gameEnd - gameStart,
+        errors,
+        length,
+        quoteId,
+        uniqueCharacters,
+        userName
+      });
+    } catch (err) {
+      // log error analytics
+    } finally {
+      setIsNextButtonLoading(false);
+    }
 
     navigate('/score');
   };
@@ -65,7 +76,12 @@ const GameBoard = ({ restartGame }: GameBoardProps) => {
       return (
         <div className="flex flex-col justify-center items-center gap-4">
           <h3>Congratulations, you won!</h3>
-          <Button variant="contained" label="Next" onClick={handleNextClick} />
+          <Button
+            variant="contained"
+            label="Next"
+            onClick={handleNextClick}
+            isLoading={isNextButtonLoading}
+          />
         </div>
       );
   }

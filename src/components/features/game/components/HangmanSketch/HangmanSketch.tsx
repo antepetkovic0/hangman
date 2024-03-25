@@ -1,4 +1,5 @@
 import { useAppSelector } from '@store/hooks';
+import { MAX_GAME_ERRORS } from '@constants/game';
 
 const HEAD = (
   <div
@@ -48,12 +49,17 @@ function HangmanSketch() {
   const errors = useAppSelector((state) => state.game.errors);
 
   return (
-    <div className="relative">
-      {BODY_PARTS.slice(0, errors)}
-      <div className="h-[50px] w-[5px] bg-slate-100 absolute top-0 right-0" />
-      <div className="h-[5px] w-[150px] bg-slate-100 ml-[50px]" />
-      <div className="h-[200px] w-[5px] bg-slate-100 ml-[50px]" />
-      <div className="h-[5px] w-[100px] bg-slate-100" />
+    <div className="flex flex-col items-center gap-4">
+      <div className="relative">
+        {BODY_PARTS.slice(0, errors)}
+        <div className="h-[50px] w-[5px] bg-slate-100 absolute top-0 right-0" />
+        <div className="h-[5px] w-[150px] bg-slate-100 ml-[50px]" />
+        <div className="h-[200px] w-[5px] bg-slate-100 ml-[50px]" />
+        <div className="h-[5px] w-[100px] bg-slate-100" />
+      </div>
+      <div className="text-red-600 font-semibold">
+        ERRORS: {errors} / {MAX_GAME_ERRORS}
+      </div>
     </div>
   );
 }
