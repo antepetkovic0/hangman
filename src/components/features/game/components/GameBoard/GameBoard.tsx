@@ -1,6 +1,3 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { IngemarkApiService } from '@api/ingemark/ingemark-api.service';
 import { useAppSelector } from '@store/hooks';
 import Button from '@components/core/Button/Button';
 import HangmanSketch from '../HangmanSketch/HangmanSketch';
@@ -12,44 +9,7 @@ interface GameBoardProps {
 }
 
 const GameBoard = ({ restartGame }: GameBoardProps) => {
-  const navigate = useNavigate();
-
-  const userName = useAppSelector((state) => state.user.name);
-
-  const quoteId = useAppSelector((state) => state.quote.quote.id);
-  const length = useAppSelector((state) => state.quote.quote.length);
-  const uniqueCharacters = useAppSelector(
-    (state) => state.quote.quote.uniqueCharacters
-  );
-
   const status = useAppSelector((state) => state.game.status);
-  const errors = useAppSelector((state) => state.game.errors);
-  const gameStart = useAppSelector((state) => state.game.gameStart);
-  const gameEnd = useAppSelector((state) => state.game.gameEnd);
-
-  const [isNextButtonLoading, setIsNextButtonLoading] = useState(false);
-
-  const handleNextClick = async () => {
-    const api = new IngemarkApiService();
-
-    try {
-      setIsNextButtonLoading(true);
-      await api.sendScore({
-        duration: gameEnd - gameStart,
-        errors,
-        length,
-        quoteId,
-        uniqueCharacters,
-        userName
-      });
-    } catch (err) {
-      // log error analytics
-    } finally {
-      setIsNextButtonLoading(false);
-    }
-
-    navigate('/score');
-  };
 
   switch (status) {
     case 'idle':
@@ -76,12 +36,7 @@ const GameBoard = ({ restartGame }: GameBoardProps) => {
       return (
         <div className="flex flex-col justify-center items-center gap-4">
           <h3>Congratulations, you won!</h3>
-          <Button
-            variant="contained"
-            label="Next"
-            onClick={handleNextClick}
-            isLoading={isNextButtonLoading}
-          />
+          <Button variant="contained" label="New game" onClick={restartGame} />
         </div>
       );
   }
