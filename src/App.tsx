@@ -1,4 +1,5 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
+import { SpeedInsights } from '@vercel/speed-insights/react';
 import { ROUTES } from '@navigation/routes';
 import Layout from '@components/shared/layouts/MainLayout/MainLayout';
 import ProtectedRoute from '@components/shared/utilities/ProtectedRoute/ProtectedRoute';
@@ -19,6 +20,7 @@ const App = () => (
       </Route>
       <Route path={'*'} element={<Navigate to={'/'} />} />
     </Routes>
+    <SpeedInsights />
   </div>
 );
 
